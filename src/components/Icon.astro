@@ -1,7 +1,7 @@
 ---
 export type IconName =
   | 'mail' | 'calendar' | 'chat' | 'files' | 'agent' | 'link'
-  | 'check' | 'code' | 'arrow';
+  | 'check' | 'code' | 'arrow' | 'plus';
 
 interface Props {
   name: IconName;
@@ -32,4 +32,5 @@ const { name, size = 24, strokeWidth = 1.8, class: className } = Astro.props;
   {name === 'check' && <path d="M5 12l5 5 9-10" />}
   {name === 'code' && <path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16" />}
   {name === 'arrow' && <path d="M5 12h14M13 6l6 6-6 6" />}
+  {name === 'plus' && <><rect x="3.5" y="3.5" width="17" height="17" rx="4" stroke-dasharray="3 2.6" /><path d="M12 8v8M8 12h8" /></>}
 </svg>
