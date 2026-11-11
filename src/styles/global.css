@@ -41,9 +41,30 @@
   --section: clamp(72px, 10vw, 112px);
 }
 
-/* Dark Mode: folgt automatisch der Systemeinstellung */
+/* Dark Mode
+   - ohne gespeicherte Wahl: folgt der Systemeinstellung
+   - mit Umschalter: <html data-theme="dark|light"> überschreibt das System */
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] {
+  color-scheme: dark;
+    --ink: #eceae3;
+    --ink-2: #d6d4cd;
+    --muted: #a9acb3;
+    --paper: #111317;
+    --carton: #17191e;
+    --line: #2a2d34;
+    --white: #1b1e24;
+    --accent-text: #ff8a4c;
+    --ext: #5fc9bc;
+    --ext-deep: #c4ece6;
+    --ext-light: #0f2a28;
+    --surface-dark: #1d2027;
+    --dark-2: #252830;
+    --dark-line: #383b44;
+    --rule-strong: #4a4d55;
+  }
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --ink: #eceae3;
     --ink-2: #d6d4cd;
     --muted: #a9acb3;
