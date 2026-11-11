@@ -40,6 +40,7 @@ const agentSteps = [
 ];
 
 const principles = [
+  { title: 'Unabhängig von US-Tech', text: 'Keine Abhängigkeit von Microsoft, Google, Amazon oder Slack – keine plötzlichen Lizenzänderungen, Preiserhöhungen, erzwungenen Cloud-Umstellungen oder über Nacht geänderten Bedingungen.' },
   { title: 'Quellcode offen', text: `Jede Zeile einsehbar und prüfbar. Weiterentwickelt mit der Community.` },
   { title: 'Dein Server, deine Daten', text: 'Per Docker oder Helm-Chart auf eigener Hardware – oder gehostet in einem Rechenzentrum in der EU.' },
   { title: 'Standards statt Lock-in', text: 'IMAP, CalDAV, CardDAV, WebDAV und Matrix. Umziehen kannst du jederzeit – mit allen Daten.' },
@@ -189,7 +190,7 @@ const principles = [
       {principles.map((p, i) => (
         <li class="principle">
           <span class="principle__n">{String(i + 1).padStart(2, '0')}</span>
-          <h3 class="principle__title">{p.title}</h3>
+          <h3 class="principle__title">{p.title.split(" ").map((w, j) => <>{j > 0 && " "}<span class="nowrap">{w}</span></>)}</h3>
           <p class="principle__text">{p.text}</p>
         </li>
       ))}
@@ -344,10 +345,11 @@ const principles = [
 
   /* Open source */
   .text-link { font-weight: 600; text-underline-offset: 4px; min-height: 44px; display: inline-flex; align-items: center; }
-  .principles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 40px; }
+  .principles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); gap: 40px 32px; }
   .principle { display: flex; flex-direction: column; gap: 14px; }
   .principle__n { font-family: var(--font-display); font-weight: 700; font-size: 64px; line-height: 1; color: var(--accent-text); }
   .principle__title { font-family: var(--font-display); font-weight: 600; font-size: 24px; }
+  .nowrap { white-space: nowrap; }
   .principle__text { color: var(--muted); line-height: 1.55; }
 
   /* Pricing */
