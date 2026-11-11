@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 64" width="250" height="64"><style>@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&amp;display=swap');</style>
-  
-  <path d="M50 14 A24 24 0 1 0 50 50" fill="none" stroke="#18202A" stroke-width="8" stroke-linecap="round"/>
-  <rect x="27" y="22" width="20" height="20" rx="5" fill="#10B981"/>
-  <circle cx="54" cy="32" r="5" fill="#10B981"/>
-  <text x="78" y="46" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="40" letter-spacing="-1"><tspan fill="#10B981">Co</tspan><tspan fill="#18202A">Box</tspan></text>
-</svg>
