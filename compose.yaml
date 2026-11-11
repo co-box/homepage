@@ -14,11 +14,17 @@ services:
       context: .
       target: dev
     image: cobox-homepage:dev
+    # Always rebuild: otherwise `up` silently reuses an old image whose
+    # node_modules / toolchain no longer matches package.json.
+    pull_policy: build
     profiles: ["dev"]
     ports:
       - "4321:8080"
+    # Mount only what needs hot reload. node_modules stays inside the image,
+    # so a stale host/anonymous volume can never hide the installed deps.
     volumes:
-      - .:/app
-      # Keep the image's node_modules instead of the host's
-      - /app/node_modules
+      - ./src:/app/src
+      - ./public:/app/public
+      - ./astro.config.mjs:/app/astro.config.mjs:ro
+      - ./tsconfig.json:/app/tsconfig.json:ro
     command: npm run dev -- --host 0.0.0.0 --port 8080

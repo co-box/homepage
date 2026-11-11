@@ -1,0 +1,27 @@
+# Static file server for the Astro build output (copied to /srv).
+# Plain HTTP on :80 – TLS is expected to be terminated by a reverse proxy /
+# load balancer in front of this container.
+:80 {
+	root * /srv
+	encode zstd gzip
+
+	# Container health probe used by the Docker HEALTHCHECK.
+	handle /healthz {
+		respond 200
+	}
+
+	# Astro emits content-hashed filenames (CSS, JS, fonts) under /_astro/:
+	# these can be cached forever.
+	handle /_astro/* {
+		header Cache-Control "public, max-age=31536000, immutable"
+		file_server
+	}
+
+	# Everything else must revalidate so deployments take effect immediately.
+	# Static multi-page site: /impressum -> /impressum/index.html
+	handle {
+		header Cache-Control "no-cache"
+		try_files {path} {path}/index.html
+		file_server
+	}
+}
