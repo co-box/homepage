@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Logo from '../components/Logo.astro';
+import WordMorph from '../components/WordMorph.astro';
 import Icon, { type IconName } from '../components/Icon.astro';
 import { site } from '../site.config';
 
@@ -47,6 +48,7 @@ const principles = [
 <Base>
   <!-- HERO -->
   <section class="container hero">
+    <WordMorph class="hero__morph" />
     <div class="hero__copy">
       <ul class="pills mono" aria-label="Eigenschaften">
         <li>Open Source</li>
@@ -241,16 +243,17 @@ const principles = [
 
   /* Hero */
   .hero {
-    padding-block: clamp(56px, 8vw, 88px) clamp(72px, 9vw, 96px);
+    padding-block: clamp(48px, 7vw, 80px) clamp(72px, 9vw, 96px);
     display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr));
     gap: 64px; align-items: center;
   }
+  .hero :global(.hero__morph) { grid-column: 1 / -1; margin-bottom: -16px; }
   .hero__copy { display: flex; flex-direction: column; gap: 28px; }
   .pills { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; }
   .pills li { padding: 6px 10px; border: 1px solid var(--ink); border-radius: 999px; }
   .hero__title {
     font-family: var(--font-display); font-weight: 700;
-    font-size: clamp(40px, 6vw, 76px); line-height: 0.98; letter-spacing: -0.035em; text-wrap: balance;
+    font-size: clamp(32px, 4.2vw, 54px); line-height: 1.04; letter-spacing: -0.03em; text-wrap: balance;
   }
   .hero__lead { font-size: clamp(18px, 1.6vw, 20px); max-width: 540px; }
   .actions { display: flex; flex-wrap: wrap; gap: 12px; }

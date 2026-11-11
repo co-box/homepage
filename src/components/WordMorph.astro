@@ -1,0 +1,95 @@
+---
+/**
+ * Animierte Wortmarke: tauscht das Wort vor „Box“ aus (Collaboration → Cooperation → …)
+ * und endet immer wieder bei „CoBox“. Das führende „Co“ (bzw. „C“) bleibt in der Akzentfarbe.
+ * Ohne JavaScript oder bei „Bewegung reduzieren“ steht statisch „CoBox“ da.
+ */
+interface Props {
+  words?: string[];
+  class?: string;
+}
+const {
+  words = ['Collaboration', 'Cooperation', 'Communication', 'Chat', 'Co'],
+  class: className,
+} = Astro.props;
+---
+<p class:list={['morph', className]} aria-label="CoBox" data-words={JSON.stringify(words)}>
+  <span class="morph__text" aria-hidden="true"><span class="morph__hl">Co</span><span class="morph__rest"></span></span><span class="morph__caret" aria-hidden="true"></span><span class="morph__box" aria-hidden="true">Box</span>
+</p>
+
+<style>
+  .morph {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(30px, 8.2vw, 112px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    white-space: nowrap;
+    display: flex;
+    align-items: baseline;
+    color: var(--ink);
+  }
+  .morph__hl { color: var(--accent); }
+  .morph__caret {
+    align-self: stretch;
+    width: 0.07em;
+    margin: 0.06em 0.03em -0.04em;
+    background: var(--accent);
+    border-radius: 2px;
+    animation: morph-blink 1s steps(1) infinite;
+  }
+  .morph.is-typing .morph__caret { animation: none; }
+  @keyframes morph-blink { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .morph__caret { display: none; }
+  }
+</style>
+
+<script>
+  const TYPE_MS = 65;
+  const DELETE_MS = 35;
+  const HOLD_MS = 1300;
+  const HOLD_HOME_MS = 2800; // länger auf „CoBox“
+
+  const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+  const commonPrefix = (a: string, b: string) => {
+    let i = 0;
+    while (i < a.length && i < b.length && a[i] === b[i]) i++;
+    return a.slice(0, i);
+  };
+
+  function render(el: HTMLElement, text: string) {
+    const hlLen = text.startsWith('Co') ? 2 : Math.min(1, text.length);
+    el.querySelector('.morph__hl')!.textContent = text.slice(0, hlLen);
+    el.querySelector('.morph__rest')!.textContent = text.slice(hlLen);
+  }
+
+  async function run(el: HTMLElement) {
+    const words: string[] = JSON.parse(el.dataset.words || '[]');
+    if (!words.length) return;
+    let text = 'Co';
+    let i = 0;
+    await sleep(HOLD_HOME_MS / 2);
+    while (true) {
+      const target = words[i];
+      const keep = commonPrefix(text, target);
+      el.classList.add('is-typing');
+      while (text.length > keep.length) {
+        text = text.slice(0, -1);
+        render(el, text);
+        await sleep(DELETE_MS);
+      }
+      while (text.length < target.length) {
+        text = target.slice(0, text.length + 1);
+        render(el, text);
+        await sleep(TYPE_MS);
+      }
+      el.classList.remove('is-typing');
+      await sleep(target === 'Co' ? HOLD_HOME_MS : HOLD_MS);
+      i = (i + 1) % words.length;
+    }
+  }
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) document.querySelectorAll<HTMLElement>('.morph').forEach((el) => run(el));
+</script>
