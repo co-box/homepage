@@ -1,0 +1,87 @@
+---
+import '../styles/global.css';
+import Logo from '../components/Logo.astro';
+import { site } from '../site.config';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title, description = site.description } = Astro.props;
+const fullTitle = title ? `${title} · ${site.name}` : `${site.name} – Zusammenarbeit für KMU, offen und selbstbestimmt`;
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#15171c" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_AT" />
+  </head>
+  <body>
+    <a class="skip-link btn btn--ink" href="#inhalt">Zum Inhalt springen</a>
+
+    <header class="site-header">
+      <nav class="container nav" aria-label="Hauptnavigation">
+        <a href="/" class="nav__brand" aria-label="CoBox Startseite"><Logo size={34} /></a>
+        <ul class="nav__links">
+          <li><a href="/#module">Module</a></li>
+          <li><a href="/#agents">Agents</a></li>
+          <li><a href="/#opensource">Open Source</a></li>
+          <li><a href="/#preise">Preise</a></li>
+        </ul>
+        <a class="btn btn--ink nav__cta" href={site.contactHref}>Demo anfragen</a>
+      </nav>
+    </header>
+
+    <main id="inhalt">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer">
+        <Logo size={26} />
+        <ul class="footer__links">
+          <li><a href={site.docsHref}>Dokumentation</a></li>
+          <li><a href={site.githubHref}>Quellcode</a></li>
+          <li><a href="/datenschutz">Datenschutz</a></li>
+          <li><a href="/impressum">Impressum</a></li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-header { border-bottom: 1px solid var(--line); }
+  .nav {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 12px 24px; padding-block: 16px;
+  }
+  .nav__brand { text-decoration: none; display: inline-flex; min-height: 44px; align-items: center; }
+  .nav__links {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-wrap: wrap; gap: 4px 28px;
+    font-size: 15px; font-weight: 500;
+  }
+  .nav__links a { text-decoration: none; display: inline-flex; min-height: 44px; align-items: center; }
+  .nav__cta { min-height: 44px; padding: 10px 18px; font-size: 15px; }
+  @media (max-width: 760px) {
+    .nav__links { order: 3; width: 100%; justify-content: space-between; gap: 4px 16px; }
+  }
+
+  .site-footer { border-top: 1px solid var(--line); }
+  .footer {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 24px; padding-block: 40px 56px; font-size: 14px;
+  }
+  .footer__links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 24px; }
+  .footer__links a { color: var(--muted); }
+  .footer__links a:hover { color: var(--accent-text); }
+</style>
