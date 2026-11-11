@@ -1,7 +1,7 @@
 ---
 /**
- * Animierte Wortmarke: tauscht das Wort vor „Box“ aus (Collaboration → Cooperation → …)
- * und endet immer wieder bei „CoBox“. Das führende „Co“ (bzw. „C“) bleibt in der Akzentfarbe.
+ * Animierte Wortmarke: tauscht das Wort vor „Box“ aus (Collaboration → Cooperation → Communication)
+ * und endet immer wieder bei „CoBox“. Das führende „Co“ bleibt in der Akzentfarbe.
  * Ohne JavaScript oder bei „Bewegung reduzieren“ steht statisch „CoBox“ da.
  */
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
   class?: string;
 }
 const {
-  words = ['Collaboration', 'Cooperation', 'Communication', 'Chat', 'Co'],
+  words = ['Collaboration', 'Cooperation', 'Communication', 'Co'],
   class: className,
 } = Astro.props;
 ---
