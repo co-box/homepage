@@ -6,7 +6,7 @@ interface Props {
   class?: string;
 }
 const { size = 32, variant = 'light', wordmark = true, class: className } = Astro.props;
-const stroke = variant === 'dark' ? 'var(--paper)' : 'var(--ink)';
+const stroke = variant === 'dark' ? 'var(--on-dark-strong)' : 'var(--ink)';
 ---
 <span class:list={['logo', `logo--${variant}`, className]} style={`--logo-size:${size}px`}>
   <svg width={size} height={size} viewBox="0 0 40 40" aria-hidden="true">
@@ -27,6 +27,6 @@ const stroke = variant === 'dark' ? 'var(--paper)' : 'var(--ink)';
     line-height: 1;
     color: var(--ink);
   }
-  .logo--dark .logo__word { color: var(--paper); }
+  .logo--dark .logo__word { color: var(--on-dark-strong); }
   .logo__co { color: var(--accent); }
 </style>
