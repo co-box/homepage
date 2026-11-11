@@ -1,6 +1,6 @@
 # CoBox – Homepage
 
-Statische Landingpage für CoBox, gebaut mit [Astro](https://astro.build).
+Statische Landingpage für CoBox (Zielgruppe: KMU, Vereine und NGOs), gebaut mit [Astro](https://astro.build).
 Schriften (Inter, Space Grotesk, JetBrains Mono) sind selbst gehostet über Fontsource – keine Anfragen an Google Fonts.
 
 ## Entwickeln
