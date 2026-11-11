@@ -50,6 +50,24 @@ npm run dev
 - Click on "New codespace" to launch a new Codespace environment.
 - Edit files directly within the Codespace and commit and push your changes once you're done.
 
+## Run with Docker
+
+Build the production bundle and serve it with nginx:
+
+```sh
+docker compose up --build
+```
+
+Then open http://localhost:8080.
+
+For a hot-reloading dev server (source is bind-mounted into the container):
+
+```sh
+docker compose --profile dev up dev
+```
+
+Then open http://localhost:5173.
+
 ## What technologies are used for this project?
 
 This project is built with:
