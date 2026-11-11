@@ -13,7 +13,7 @@ npm run build    # statische Ausgabe in dist/
 
 ## Vor dem Livegang
 
-Platzhalter in `src/site.config.ts` ersetzen: Domain, Kontakt-/Demo-Link, Lizenz, Preise, Doku-Link.
+Platzhalter in `src/site.config.ts` ersetzen: Domain, Kontakt-/Demo-Link, Doku-Link. Preise eintragen, sobald sie feststehen (bis dahin zeigt die Seite „Preis folgt“).
 Außerdem `src/pages/impressum.astro` und `src/pages/datenschutz.astro` befüllen.
 
 ## Struktur

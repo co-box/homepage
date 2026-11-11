@@ -40,7 +40,7 @@ const agentSteps = [
 ];
 
 const principles = [
-  { title: 'Quellcode offen', text: `Jede Zeile einsehbar und prüfbar. Lizenz: ${site.license}. Weiterentwickelt mit der Community.` },
+  { title: 'Quellcode offen', text: `Jede Zeile einsehbar und prüfbar. Weiterentwickelt mit der Community.` },
   { title: 'Dein Server, deine Daten', text: 'Per Docker oder Helm-Chart auf eigener Hardware – oder gehostet in einem Rechenzentrum in der EU.' },
   { title: 'Standards statt Lock-in', text: 'IMAP, CalDAV, CardDAV, WebDAV und Matrix. Umziehen kannst du jederzeit – mit allen Daten.' },
 ];
@@ -209,13 +209,15 @@ const principles = [
         </article>
         <article class="plan plan--featured">
           <span class="mono plan__label plan__label--accent">COBOX CLOUD</span>
-          <p class="plan__price">{site.priceCloud} <span class="plan__unit">pro Person / Monat</span></p>
+          {site.priceCloud
+            ? <p class="plan__price">{site.priceCloud} <span class="plan__unit">pro Person / Monat</span></p>
+            : <p class="plan__price plan__price--tbd">Preis folgt</p>}
           <p class="plan__text">Wir betreiben, sichern und aktualisieren. Hosting in der EU, Gäste kostenlos.</p>
           <a class="btn btn--accent plan__cta" href={site.contactHref}>Demo anfragen</a>
         </article>
         <article class="plan">
           <span class="mono plan__label">SUPPORT</span>
-          <p class="plan__price">{site.priceSupport}</p>
+          <p class:list={['plan__price', !site.priceSupport && 'plan__price--tbd']}>{site.priceSupport ?? 'Preis folgt'}</p>
           <p class="plan__text">Für den Eigenbetrieb: Einrichtung, Migration bestehender Postfächer und garantierte Reaktionszeiten.</p>
           <a class="btn btn--outline plan__cta" href={site.contactHref}>Kontakt aufnehmen</a>
         </article>
@@ -355,6 +357,7 @@ const principles = [
   .plan__label { font-size: 13px; }
   .plan__label--accent { color: var(--accent); }
   .plan__price { font-family: var(--font-display); font-weight: 700; font-size: 44px; letter-spacing: -0.02em; line-height: 1.1; }
+  .plan__price--tbd { opacity: 0.55; }
   .plan__unit { font-size: 18px; font-weight: 500; color: var(--on-dark); letter-spacing: 0; }
   .plan__text { color: var(--muted); }
   .plan--featured .plan__text { color: var(--on-dark); }

@@ -1,4 +1,4 @@
-// Zentrale Einstellungen der Website. Platzhalter in [ECKIGEN KLAMMERN] vor dem Livegang ersetzen.
+// Zentrale Einstellungen der Website. Platzhalter (TODO, [ECKIGE KLAMMERN]) vor dem Livegang ersetzen.
 export const site = {
   name: 'CoBox',
   url: 'https://cobox.example', // TODO: echte Domain
@@ -8,7 +8,8 @@ export const site = {
   githubHref: 'https://github.com/co-box',
   docsHref: '#', // TODO: Link zur Dokumentation
   installHref: 'https://github.com/co-box/helm-charts',
-  license: '[LIZENZ]',
-  priceCloud: '[PREIS]',
-  priceSupport: '[PREIS]',
+  // Preise: null = noch nicht festgelegt, dann zeigt die Seite „Preis folgt“.
+  // Beispiel: priceCloud: '6 €' (wird mit „pro Person / Monat“ ergänzt), priceSupport: 'ab 490 €'
+  priceCloud: null as string | null,
+  priceSupport: null as string | null,
 };
