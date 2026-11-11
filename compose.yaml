@@ -1,0 +1,24 @@
+services:
+  web:
+    build:
+      context: .
+      target: runtime
+    image: cobox-homepage:local
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+
+  # Hot-reloading dev server: `docker compose --profile dev up dev`
+  dev:
+    build:
+      context: .
+      target: dev
+    image: cobox-homepage:dev
+    profiles: ["dev"]
+    ports:
+      - "4321:8080"
+    volumes:
+      - .:/app
+      # Keep the image's node_modules instead of the host's
+      - /app/node_modules
+    command: npm run dev -- --host 0.0.0.0 --port 8080

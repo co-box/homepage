@@ -23,3 +23,12 @@ Außerdem `src/pages/impressum.astro` und `src/pages/datenschutz.astro` befülle
 - `src/components/Logo.astro` – Bildmarke + Wortmarke (`variant="light|dark"`)
 - `src/components/Icon.astro` – Modul-Icons
 - `src/styles/global.css` – Design-Tokens (Farben, Schriften) und Basis-Styles
+
+## Docker
+
+```sh
+docker compose up --build                    # statische Seite via nginx auf http://localhost:8080
+docker compose --profile dev up dev          # Astro-Dev-Server mit Hot Reload auf http://localhost:4321
+```
+
+Das Image (`target: runtime`) ist ein nginx mit dem fertigen Build und einem Health-Check unter `/healthz`.
